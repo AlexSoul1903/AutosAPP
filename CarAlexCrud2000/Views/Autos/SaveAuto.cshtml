@@ -1,0 +1,99 @@
+﻿@using CarAlexCrud2000.Core.Aplication.ViewModels.Autos;
+@model SaveAutoViewModel
+@{
+
+	bool editFase = Model.IdAuto == 0 ? false : true;
+	string determina;
+	@if (editFase)
+	{
+		 determina = "Editar auto";
+	}else{
+	 determina = "Guardar autos";
+	}
+	
+	ViewData["Title"] = @determina;
+
+}
+
+<div class="container-fluid">
+
+	<div class="row">
+
+		<div class="offset-3 col-6"> 
+
+			<div class="card">
+
+				<div class="card-header bg-success text-white">
+
+					<h4>@(editFase ? $"Editando el auto de marca: {Model.Marca} y modelo {Model.Modelo}" :"Creando un nuevo auto" )</h4>
+
+				</div>
+
+			<div class="card-body">
+
+				@if(Model.EstatusList.Count==0 || Model.EstatusList==null){
+
+
+					<h4>No hay estatus guardados en el sistema, cree los estatus para continuar.</h4>
+
+				}else{
+
+				<form method="post" asp-controller="Autos" asp-action="@(editFase ? "Edit" : "Create")">
+
+
+					<div class="mb-3">
+
+						<label asp-for="Marca" class="form-label">Marca: </label>
+						<input asp-for="Marca" type="text" class="form-control" />
+						<span asp-validation-for="Marca" class="text-danger"></span>
+					</div>
+
+						<div class="mb-3">
+
+							<label asp-for="ImgRuta" class="form-label">Ruta de la imagen: </label>
+							<input asp-for="ImgRuta" type="text" class="form-control" />
+
+						</div>
+						<div class="mb-3">
+
+							<label asp-for="Modelo" class="form-label">Modelo: </label>
+							<input asp-for="Modelo" type="text" class="form-control" />
+							<span asp-validation-for="Modelo" class="text-danger"></span>
+						</div>
+						<div class="mb-3">
+
+							<label asp-for="Year" class="form-label">Año: </label>
+							<input asp-for="Year" type="text" class="form-control" />
+							<span asp-validation-for="Year" class="text-danger"></span>
+						</div>
+
+						<div class="mb-3">
+
+							<label asp-for="miEstatusId" class="form-label">Estatus: </label>
+							<select asp-for="miEstatusId" asp-items="@(new SelectList(Model.EstatusList,"IdEstatus","Descripcion"))" class="form-select">
+								<option value="0">Seleccione una opcion</option>
+			
+								</select>
+							<span asp-validation-for="miEstatusId" class="text-danger"></span>
+								
+						</div>
+						
+						<input type="hidden" asp-for="IdAuto"/>
+					
+						<button type="submit" class=" btn btn-success text-white">Guardar</button>
+						<a asp-controller="Autos" asp-action="Index" class="btn btn-warning text-white">Volver atras</a>
+
+
+
+					</form>
+
+					}
+			</div>
+
+			</div>
+
+		</div>
+
+	</div>
+
+</div>

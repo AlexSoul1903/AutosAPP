@@ -1,0 +1,122 @@
+﻿@using CarAlexCrud2000.Core.Aplication.ViewModels.Autos
+@using CarAlexCrud2000.Core.Aplication.ViewModels.Estatus
+@model List<AutoViewModel>
+@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="container-fluid">
+
+
+
+
+    <div class="row">
+
+        <div class="col-4">
+
+
+                <div class="card  mb-4 box-shadow">
+                   
+
+                    <div class="card-header bg-warning text-dark"> Filtrar</div>
+                    <div class="card-body">
+                    
+
+                        <h4 class="card-title">Estatus</h4>
+
+                        <form method="post" asp-controller="Home" asp-action="Index">
+
+                            <div class=" mb-4">
+
+                                <div class="form-check">
+
+                                   <input class="form-check" type="radio" value="null" id="estatus-all" name="IdEstatus" />
+
+                                   <label class="form-check-label" for="all-estatus"for>Todos</label>
+
+                                </div>
+
+                            </div>
+
+                        @foreach (EstatusViewModel item in ViewBag.EstatusList)
+                        {
+                            <div class=" mb-4">
+
+                                <div class="form-check">
+
+                                    <input class="form-check" type="radio" value="@item.IdEstatus" id="estatus-@item.IdEstatus" name="IdEstatus" />
+                                    
+                                    <label class="form-check-label" for="all-@item.IdEstatus" for>@item.Descripcion</label>
+
+                                </div>
+
+                            </div>
+
+
+                        }
+
+                        <button class="btn btn-info" type="submit">Filtrar</button>
+
+
+                        </form>
+                     
+
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+
+        <div class="col-8">
+
+
+            <div class="row">
+
+                @if (Model.Count == 0 || Model == null)
+                {
+
+                    <h2 class="text-danger">No hay carros disponibles</h2>
+                }
+                else
+                {
+
+                    @foreach (AutoViewModel item in Model)
+                    {
+
+
+
+
+                        <div class="col-md-4">
+                            <div class="card  mb-4 box-shadow">
+                                <img class="bd-placeholder-img card-img-top img-fluid Img-Car-Size" src="@item.ImgRuta">
+                                <div class="card-body">
+                                    <h4 class="text-info fm-bold">Marca:@item.Marca</h4>
+                                    <h4 class="text-info">Estatus: @item.EstatusDescripcion</h4>
+                                    <h4 class="text-info">Modelo:@item.Modelo</h4>
+                                    <h4 class="text-info">Año: @item.Year</h4>
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                }
+
+
+
+
+
+            </div>
+    </div>
+
+
+       
+      
+</div>
+
+
+</div>

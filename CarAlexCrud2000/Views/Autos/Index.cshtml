@@ -1,0 +1,62 @@
+﻿@using CarAlexCrud2000.Core.Aplication.ViewModels.Autos
+@model List<AutoViewModel>
+@{
+    ViewData["Title"] = "Autos";
+}
+
+<div class="container-fluid">
+
+    <div class="row mb-2">
+        <div class="offset-9 col-3">
+
+            <a asp-controller="Autos" asp-action="Create" class="btn btn-outline-primary">Insertar Auto</a>
+
+        </div>
+
+    </div>
+
+    <div class="row">
+        @foreach (AutoViewModel item in Model)
+        {
+
+            @if (Model.Count == 0 || Model == null)
+            {
+
+                <h2 class="text-dark">No hay carros disponibles</h2>
+
+            }
+            else
+            {
+
+                <div class="col-md-4">
+                    <div class="card  mb-4 box-shadow">
+                        <img class="bd-placeholder-img card-img-top img-fluid Img-Car-Size" src="@item.ImgRuta">
+                        <div class="card-body">
+                            <h4 class="text-info fm-bold">Marca:@item.Marca</h4>
+                            <h4 class="text-info">Estatus: @item.EstatusDescripcion</h4>
+                            <h4 class="text-info">Modelo:@item.Modelo</h4>
+                            <h4 class="text-info">Año: @item.Year</h4>
+
+                            <div class="d-flex aling-items-center justify-content-between">
+
+                                <div class="btn-group">
+
+                                    <a asp-controller="Autos" asp-action="Edit" asp-route-Id="@item.IdAuto" class="btn btn-outline-warning btn-sm">Editar</a>
+                                    <a asp-controller="Autos" asp-action="Delete" asp-route-Id="@item.IdAuto" class="btn btn-outline-danger btn-sm mx-2">Eliminar</a>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            }
+
+        } 
+     
+        
+    </div>
+
+
+</div>

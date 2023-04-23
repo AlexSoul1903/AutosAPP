@@ -1,0 +1,38 @@
+﻿@using CarAlexCrud2000.Core.Aplication.ViewModels.Autos
+@model SaveAutoViewModel
+@{
+    ViewData["Title"] = "Borrar autos";
+}
+
+<div class="row">
+
+    <div class="offset-3 col-6">
+
+        <div class="card">
+
+            <div class=" bg-danger card-header text-light">
+
+                <h4>Estas seguro de que quieres eliminar el Auto marca @Model.Marca y Modelo @Model.Modelo?</h4>
+
+            </div>
+
+            <div class="card-body">
+
+                <form method="post" asp-controller="Autos" asp-action="Delete">
+
+                    <input type="hidden" asp-for="IdAuto" />
+
+    
+                    <button type="submit" class="btn btn-danger">Borrar</button>
+                    <a asp-controller="Autos" asp-action="Index" class="btn btn-outline-warning">Cancelar</a>
+
+                    </form>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>

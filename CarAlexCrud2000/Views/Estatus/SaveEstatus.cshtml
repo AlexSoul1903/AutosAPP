@@ -1,0 +1,70 @@
+﻿@using CarAlexCrud2000.Core.Aplication.ViewModels.Estatus;
+@model SaveEstatusViewModel
+@{
+	bool editFase=true;
+	@if (Model.IdEstatus==0||Model==null)
+	{
+
+		editFase = false;
+
+	}else{
+
+		editFase = true;
+	}
+	
+	string determina;
+	@if (editFase)
+	{
+		 determina = "Editar estatus";
+	}else{
+	 determina = "Guardar estatus";
+	}
+	
+	ViewData["Title"] = @determina;
+
+}
+
+<div class="container-fluid">
+
+	<div class="row">
+
+		<div class="offset-3 col-6"> 
+
+			<div class="card">
+
+				<div class="card-header bg-success text-white">
+
+					<h4>@(editFase ? $"Editando el estatus de: {Model.Descripcion}" : $"Creando un nuevo estatus" )</h4>
+
+				</div>
+
+			<div class="card-body">
+
+				<form method="post" asp-controller="Estatus" asp-action="@(editFase ? "Edit" : "Create")">
+
+
+					<div class="mb-3">
+
+						<label asp-for="Descripcion" class="form-label">Descripcion: </label>
+						<input asp-for="Descripcion" type="text" class="form-control" />
+						<span asp-validation-for="Descripcion" class="text-danger"></span>
+					</div>
+
+					<input type="hidden" asp-for="IdEstatus"/>
+					
+						<button type="submit" class=" btn btn-success text-white">Guardar</button>
+						<a asp-controller="Estatus" asp-action="Index" class="btn btn-warning text-white">Volver atras</a>
+
+
+
+					</form>
+
+			</div>
+
+			</div>
+
+		</div>
+
+	</div>
+
+</div>
